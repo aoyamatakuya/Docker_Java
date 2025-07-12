@@ -17,9 +17,10 @@
 
 ```bash
 キャッシュをクリアしてビルド
-docker-compose build --no-cache
+(docker-compose build --no-cache)
 
 コンテナを起動
-docker-compose up -d
+(docker-compose up -d)
 
-Ctrl + Shift + P → Devcontainerに対してAttachを選択
+コンテナに作成したJava24の環境でファイル編集・デバッグ等を行う
+(Ctrl + Shift + P → Devcontainerに対してAttachを選択)
