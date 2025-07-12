@@ -4,8 +4,12 @@ services:
     java-24-amazon-corretto:
         # 同階層のDockerfileを使ってイメージをビルド
         build: .
+        image: java-24-amazon-corretto #イメージ名
         volumes:
-            # ホストの現在のディレクトリ（このファイルのある場所）をコンテナの /app にマウント（共有）する
-            - ./:/app
-        # コンテナ起動時の作業ディレクトリを /app に設定
-        working_dir: /app
+            # ホストの現在のディレクトリ（このファイルのある場所）をコンテナの /app/src にマウント（共有）する
+            - ./src:/app/src
+        # コンテナ起動時の作業ディレクトリを /app/src に設定
+        working_dir: /app/src
+        stdin_open: true #コンテナを起動する際に標準入力を開く
+        tty: true #コンテナを起動する際にターミナルを起動する
+        command: /bin/bash #コンテナを起動する際にbashを起動する

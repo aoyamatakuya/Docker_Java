@@ -1,5 +1,14 @@
 FROM amazonlinux:2023
 
+# devcontainer機能利用のため必要なパッケージをインストール
+RUN dnf install -y \
+    tar gzip unzip wget git which util-linux \
+    shadow-utils sudo bash-completion procps-ng \
+    iproute iputils findutils hostname man-db less \
+    vim nano jq \
+    && dnf clean all
+
+# Java 24 (Amazon Corretto) をインストール
 ARG version=24.0.1.9-1
 ARG package_version=1
 
@@ -10,8 +19,8 @@ RUN set -eux \
     && pushd ${CORRETO_TEMP} \
     && RPM_LIST=("java-24-amazon-corretto-headless-$version.amzn2023.${package_version}.$(uname -m).rpm" "java-24-amazon-corretto-$version.amzn2023.${package_version}.$(uname -m).rpm" "java-24-amazon-corretto-devel-$version.amzn2023.${package_version}.$(uname -m).rpm" "java-24-amazon-corretto-jmods-$version.amzn2023.${package_version}.$(uname -m).rpm") \
     && for rpm in ${RPM_LIST[@]}; do \
-    curl --fail -O https://corretto.aws/downloads/resources/$(echo $version | tr '-' '.')/${rpm} \
-    && rpm -K "${CORRETO_TEMP}/${rpm}" | grep -F "${CORRETO_TEMP}/${rpm}: digests signatures OK" || exit 1; \
+        curl --fail -O https://corretto.aws/downloads/resources/$(echo $version | tr '-' '.')/${rpm} \
+        && rpm -K "${CORRETO_TEMP}/${rpm}" | grep -F "${CORRETO_TEMP}/${rpm}: digests signatures OK" || exit 1; \
     done \
     && dnf install -y ${CORRETO_TEMP}/*.rpm \
     && popd \
@@ -22,3 +31,5 @@ RUN set -eux \
 
 ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/java-24-amazon-corretto
+# devcontainerのworkspaceFolderと一致させる
+WORKDIR /app/src

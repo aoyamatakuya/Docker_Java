@@ -16,4 +16,10 @@
 1. リポジトリのルートディレクトリで以下を実行し、Dockerイメージをビルド＆コンテナをバックグラウンドで起動します。
 
 ```bash
-docker-compose up -d --build
+キャッシュをクリアしてビルド
+docker-compose build --no-cache
+
+コンテナを起動
+docker-compose up -d
+
+Ctrl + Shift + P → Devcontainerに対してAttachを選択
