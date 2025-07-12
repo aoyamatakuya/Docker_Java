@@ -1,0 +1,11 @@
+#バーション指定は非推奨のためコメントアウト
+#version: "3"
+services:
+    java-24-amazon-corretto:
+        # 同階層のDockerfileを使ってイメージをビルド
+        build: .
+        volumes:
+            # ホストの現在のディレクトリ（このファイルのある場所）をコンテナの /app にマウント（共有）する
+            - ./:/app
+        # コンテナ起動時の作業ディレクトリを /app に設定
+        working_dir: /app
