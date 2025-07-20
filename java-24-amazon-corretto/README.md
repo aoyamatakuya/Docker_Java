@@ -7,7 +7,6 @@
 ## 必要条件
 
 - Docker
-- Docker Compose
 
 ---
 
