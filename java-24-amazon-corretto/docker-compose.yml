@@ -6,7 +6,7 @@ services:
         build: .
         image: java-24-amazon-corretto #イメージ名
         volumes:
-            # ホストの現在のディレクトリ（このファイルのある場所）をコンテナの /app/src にマウント（共有）する
+            # ./app/srcをコンテナの /app/src にマウント（共有）する
             - ./app/src:/app/src
         # コンテナ起動時の作業ディレクトリを /app/src に設定
         working_dir: /app/src
