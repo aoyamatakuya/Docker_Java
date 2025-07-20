@@ -31,5 +31,5 @@ RUN set -eux \
 
 ENV LANG=C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/java-24-amazon-corretto
-# devcontainerのworkspaceFolderと一致させる
+# 作業ディレクトリを設定
 WORKDIR /app/src
